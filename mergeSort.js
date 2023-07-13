@@ -1,6 +1,8 @@
 const array = [];
 
-for (let i = 0; i < 10; i++) {
+const quantity = Math.floor(Math.random() * 10) + 1;
+
+for (let i = 0; i < quantity; i++) {
   array.push(Math.floor(Math.random() * 100));
 }
 
