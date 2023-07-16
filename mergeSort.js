@@ -7,28 +7,23 @@ for (let i = 0; i < quantity; i++) {
 }
 
 function mergeSort (arr) {
+  if (arr.length < 2) return arr;
+
   const left = arr.slice(0, arr.length / 2);
-  const right = arr.slice((arr.length / 2));
+  const right = arr.slice(arr.length / 2);
 
-  if (arr.length > 2) {
-    mergeSort(left);
-    mergeSort(right);
-  }
-
-  return sort(left, right);
+  return sort(mergeSort(left), mergeSort(right));
 }
 
 function sort (left, right) {
   const ordered = [];
   
-  while (left.length > 0 || right.length > 0) {
-    const lowerLeftIdx = left.indexOf(Math.min(...left));
-    const lowerRightIdx = right.indexOf(Math.min(...right));
-    let lower = left[lowerLeftIdx] < right[lowerRightIdx] || right.length === 0
-      ? left.splice(lowerLeftIdx, 1)[0]
-      : right.splice(lowerRightIdx, 1)[0];
-    ordered.push(lower);
+  while (left.length > 0 && right.length > 0) {
+    if (left.at(0) < right.at(0)) ordered.push(left.shift())
+    else ordered.push(right.shift());
   };
+  
+  ordered.push(...left, ...right);
 
   return ordered;
 }
